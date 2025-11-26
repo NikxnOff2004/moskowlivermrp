@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Москва-Live | Профиль</title>
+<link href="https://fonts.googleapis.com/css2?family=Benzin:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Benzin', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    transition: background 1s, color 1s;
+}
+
+/* --- Анимированный фон --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    background: linear-gradient(270deg, #5fb2f7, #9cd6ff, #5fb2f7, #a8dcff, #5fb2f7);
+    background-size: 1000% 1000%;
+    animation: gradientAnimation 30s ease infinite;
+    transition: background 2s;
+}
+
+body.dark::before {
+    background: linear-gradient(270deg, #0f1c2f, #194a6f, #0f1c2f, #2a5a9f, #0f1c2f);
+}
+
+@keyframes gradientAnimation {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* --- Контейнер --- */
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 30px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    transition: background 1s;
+}
+
+body.dark .container {
+    background: rgba(0,0,0,0.4);
+}
+
+/* --- Логотип --- */
+.logo {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #5fb2f7, 0 0 30px #9cd6ff;
+    animation: logoGlow 3s ease-in-out infinite alternate;
+    transition: text-shadow 1s;
+}
+
+body.dark .logo {
+    text-shadow: 0 0 15px #0f4c8c, 0 0 30px #5fb2f7;
+}
+
+@keyframes logoGlow {
+    0% {text-shadow: 0 0 10px #5fb2f7, 0 0 20px #9cd6ff;}
+    100% {text-shadow: 0 0 20px #5fb2f7, 0 0 40px #9cd6ff;}
+}
+
+/* --- Приветствие --- */
+.welcome {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 5px rgba(0,0,0,0.4);
+    transition: color 1s, text-shadow 1s;
+}
+
+/* --- Кнопки --- */
+.button {
+    width: 220px;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    text-shadow: 0 0 5px #000;
+    background: linear-gradient(90deg, #5fb2f7, #9cd6ff);
+    transition: 0.5s, transform 0.3s;
+}
+
+body.dark .button {
+    background: linear-gradient(90deg, #0f4c8c, #5fb2f7);
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+/* --- Плавающая кнопка темы --- */
+.theme-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 22px;
+    transition: background 1s, color 1s, transform 0.3s;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    background: #ffd700;
+    color: #000;
+}
+
+body.dark .theme-switch {
+    background: #0f4c8c;
+    color: #ffd700;
+}
+
+.theme-switch:hover {
+    transform: scale(1.1);
+}
+</style>
+</head>
+<body class="light">
+
+<div class="container">
+    <div class="logo">Москва-Live</div>
+    <div class="welcome" id="welcomeText">Добро пожаловать!</div>
+
+    <button class="button" onclick="logout()">Выйти</button>
+    <button class="button" onclick="window.location.href='reg.html'">Регистрация нового</button>
+</div>
+
+<button class="theme-switch" id="themeBtn">🌞</button>
+
+<script>
+// Получаем текущего пользователя из localStorage
+let users = JSON.parse(localStorage.getItem('users') || '[]');
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+if(!currentUser){
+    // Если пользователь не авторизован, перенаправляем на вход
+    window.location.href = "log.html";
+} else {
+    document.getElementById('welcomeText').innerText = `Привет, ${currentUser.firstname}!`;
+}
+
+// Функция выхода
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.href = "log.html";
+}
+
+// Плавающая кнопка смены темы
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+    const body = document.body;
+    if(body.classList.contains('light')){
+        body.classList.remove('light');
+        body.classList.add('dark');
+        themeBtn.textContent = '🌙';
+    } else {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        themeBtn.textContent = '🌞';
+    }
+});
+</script>
+
+</body>
+</html>
