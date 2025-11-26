@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Москва-Live | Регистрация</title>
+<link href="https://fonts.googleapis.com/css2?family=Benzin:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Benzin', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        transition: background 0.5s, color 0.5s;
+        color: #333;
+        position: relative;
+    }
+
+    body.light {
+        background: linear-gradient(135deg, #e0f7ff, #ffffff);
+        color: #333;
+    }
+
+    body.dark {
+        background: linear-gradient(135deg, #1b1b2f, #0f0f1a);
+        color: #fff;
+    }
+
+    .container {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    body.light .logo { color: #1a73e8; }
+    body.dark .logo { color: #00f0ff; }
+
+    .register-box {
+        width: 420px;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: background 0.5s, box-shadow 0.5s;
+    }
+
+    body.light .register-box {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 25px rgba(26, 115, 232, 0.4);
+    }
+
+    body.dark .register-box {
+        background: rgba(20, 20, 35, 0.8);
+        box-shadow: 0 0 25px #00f0ff, 0 0 50px #9b00ff;
+    }
+
+    h2 {
+        margin-bottom: 25px;
+        font-weight: 700;
+    }
+
+    body.light h2 { color: #1a73e8; }
+    body.dark h2 { color: #00f0ff; }
+
+    input, select, button {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 2px solid;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    body.light input, body.light select {
+        border-color: #1a73e8;
+        background: rgba(240,248,255,0.7);
+        color: #333;
+    }
+
+    body.dark input, body.dark select {
+        border-color: #00f0ff;
+        background: rgba(0,0,0,0.4);
+        color: #fff;
+    }
+
+    input:focus, select:focus {
+        box-shadow: 0 0 10px;
+    }
+
+    body.light input:focus, body.light select:focus { box-shadow: 0 0 10px #88cfff; }
+    body.dark input:focus, body.dark select:focus { box-shadow: 0 0 10px #00f0ff; }
+
+    button {
+        font-weight: 700;
+        cursor: pointer;
+        text-shadow: 0 0 3px #fff;
+    }
+
+    body.light button { background: linear-gradient(90deg, #1a73e8, #88cfff); color: white; border: none; }
+    body.dark button { background: linear-gradient(90deg, #00f0ff, #9b00ff); color: white; border: none; }
+
+    button:hover { opacity: 0.9; }
+
+    .back {
+        display: block;
+        margin-top: 10px;
+        text-decoration: none;
+    }
+
+    body.light .back { color: #1a73e8; }
+    body.dark .back { color: #00f0ff; }
+
+    /* --- Кнопка смены темы --- */
+    .theme-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        background: #ffd700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 22px;
+        transition: background 0.3s, transform 0.3s;
+        z-index: 100;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    body.dark .theme-switch {
+        background: #333;
+        color: #ffd700;
+    }
+
+    .theme-switch:hover {
+        transform: scale(1.1);
+    }
+
+</style>
+</head>
+<body class="light">
+
+<div class="container">
+    <div class="logo">Москва-Live</div>
+
+    <div class="register-box">
+        <h2>Регистрация</h2>
+
+        <input type="text" id="firstname" placeholder="Имя">
+        <input type="text" id="lastname" placeholder="Фамилия">
+        <input type="text" id="static" placeholder="Статик (ID / позывной)">
+
+        <select id="role" onchange="togglePosition()">
+            <option value="citizen">Гражданин</option>
+            <option value="employee">Сотрудник СМИ</option>
+            <option value="admin">Администратор</option>
+        </select>
+
+        <select id="position" style="display:none; margin-top:12px;">
+            <option value="journalist">Журналист</option>
+            <option value="operator">Оператор</option>
+            <option value="editor">Редактор</option>
+            <option value="director">Директор СМИ</option>
+        </select>
+
+        <input type="text" id="login" placeholder="Логин">
+        <input type="password" id="password" placeholder="Пароль">
+
+        <button onclick="registerUser()">Зарегистрироваться</button>
+        <a href="log.html" class="register-link">Авторизация</a>
+        <a href="index.html" class="back">Вернуться назад</a>
+    </div>
+</div>
+
+<!-- Кнопка смены темы -->
+<button class="theme-switch" id="themeBtn">🌞</button>
+
+<script>
+let users = JSON.parse(localStorage.getItem('users') || '[]');
+
+function registerUser() {
+    let firstname = document.getElementById('firstname').value;
+    let lastname = document.getElementById('lastname').value;
+    let staticID = document.getElementById('static').value;
+    let login = document.getElementById('login').value;
+    let pass = document.getElementById('password').value;
+    let role = document.getElementById('role').value;
+    let position = role === "employee" ? document.getElementById('position').value : "";
+
+    if(!firstname || !lastname || !staticID || !login || !pass) {
+        alert("Заполните все поля!");
+        return;
+    }
+
+    users.push({ firstname, lastname, staticID, login, pass, role, position });
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert("Регистрация успешна! Теперь вы можете войти.");
+    window.location.href = "log.html";
+}
+
+function togglePosition() {
+    let role = document.getElementById('role').value;
+    let pos = document.getElementById('position');
+    pos.style.display = role === "employee" ? "block" : "none";
+}
+
+// --- Смена темы с иконкой ---
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    document.body.classList.toggle('light');
+    if(document.body.classList.contains('dark')) {
+        themeBtn.textContent = '🌙';
+    } else {
+        themeBtn.textContent = '🌞';
+    }
+});
+</script>
+</body>
+</html>

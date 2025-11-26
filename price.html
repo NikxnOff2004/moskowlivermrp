@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Москва-Live — Прайс-лист</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f8fc;
+            color: #19202c;
+            margin: 0;
+        }
+        header {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 20px 0 10px 0;
+        }
+        .nav {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 20px;
+            color: #1877f2;
+            letter-spacing: 1px;
+        }
+        .nav-links a {
+            color: #19202c;
+            font-size: 16px;
+            font-weight: 500;
+            margin-left: 30px;
+            text-decoration: none;
+        }
+        main {
+            max-width: 680px;
+            margin: 42px auto 0 auto;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 26px;
+            color: #1877f2;
+        }
+        .price-list {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 24px rgba(40,60,128,0.06);
+            padding: 28px 28px 20px 28px;
+        }
+        .price-list .group {
+            margin-bottom: 24px;
+        }
+        .price-list .group-title {
+            font-weight: 600;
+            color: #1877f2;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .price-list .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 8px 0;
+            font-size: 15px;
+        }
+        .price-list .item strong {
+            color: #19202c;
+            font-weight: 600;
+        }
+        .price-list .cost {
+            color: #1877f2;
+            font-weight: 600;
+            font-size: 15px;
+            margin-left: 16px;
+        }
+        footer {
+            margin: 38px 0 0 0;
+            text-align: center;
+            color: #8ca3c0;
+            font-size: 13px;
+            padding: 18px 0;
+        }
+        @media(max-width:700px){
+            .nav, main{width: 100%; max-width: 100%;}
+            .price-list{padding: 14px;}
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="logo">МОСКВА-LIVE</div>
+        <nav class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="price.html">Прайс</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Прайс-лист</h1>
+    <div class="price-list">
+        <div class="group">
+            <div class="group-title">Рекламные эфиры</div>
+            <div class="item"><span>Разовый эфир</span><span class="cost">300 000 ₽</span></div>
+            <div class="item"><span>Пакет Бронза (2 эфира/3 дня)</span><span class="cost">900 000 ₽</span></div>
+            <div class="item"><span>Пакет Серебро (3 эфира/3 дня)</span><span class="cost">1 350 000 ₽</span></div>
+            <div class="item"><span>Пакет Золото (2 эфира/5 дней)</span><span class="cost">1 500 000 ₽</span></div>
+            <div class="item"><span>Пакет Платина (2 эфира/7 дней)</span><span class="cost">2 100 000 ₽</span></div>
+            <div class="item"><span>Пакет Премиум (3 эфира/5 дней)</span><span class="cost">2 250 000 ₽</span></div>
+            <div class="item"><span>Пакет VIP (3 эфира/7 дней)</span><span class="cost">3 150 000 ₽</span></div>
+        </div>
+        <div class="group">
+            <div class="group-title">Ивенты и медиа</div>
+            <div class="item"><span>Мероприятие под ключ</span><span class="cost">от 1 000 000 ₽</span></div>
+            <div class="item"><span>Индивидуальный журнал</span><span class="cost">от 2 000 000 ₽</span></div>
+            <div class="item"><span>Песня на заказ</span><span class="cost">от 3 000 000 ₽</span></div>
+        </div>
+    </div>
+</main>
+<footer>
+    © Москва-Live • GTA 5 RMRP • Все права в рамках RP
+</footer>
+</body>
+</html>
