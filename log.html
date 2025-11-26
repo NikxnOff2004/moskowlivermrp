@@ -91,7 +91,6 @@ button:hover {
     color: #1a73e8;
     font-weight: 700;
 }
-
 </style>
 </head>
 <body>
@@ -102,7 +101,7 @@ button:hover {
     <input type="text" id="login" placeholder="Логин">
     <input type="password" id="password" placeholder="Пароль">
 
-    <button onclick="loginUser()">Войти</button>
+    <button onclick="loginUser()">Авторизация</button>
     <a href="reg.html" class="register-link">Регистрация</a>
 </div>
 
@@ -127,9 +126,12 @@ function loginUser() {
         return;
     }
 
+    // Сохраняем текущего пользователя для профиля
+    localStorage.setItem('currentUser', JSON.stringify(user));
+
     alert(`✅ Привет, ${user.firstname}! Вы успешно вошли.`);
-    // Можно сделать редирект на главную или профиль
-    window.location.href = "index.html";
+    // Переход на страницу профиля
+    window.location.href = "prof.html";
 }
 </script>
 
