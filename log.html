@@ -14,10 +14,18 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #5fb2f7, #9cd6ff);
-    transition: background 0.5s, color 0.5s;
+    color: #333;
+    transition: background 1s, color 1s;
+}
+
+body.light {
+    background: linear-gradient(135deg, #e0f7ff, #ffffff);
+    color: #333;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #0f1c2f, #194a6f);
     color: #fff;
-    position: relative;
 }
 
 /* --- Контейнер --- */
@@ -25,13 +33,21 @@ body {
     width: 420px;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
     backdrop-filter: blur(10px);
-    background: rgba(255,255,255,0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background 0.5s;
+    transition: background 0.5s, box-shadow 0.5s;
+}
+
+body.light .login-box {
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 0 25px rgba(26,115,232,0.4);
+}
+
+body.dark .login-box {
+    background: rgba(20,20,35,0.8);
+    box-shadow: 0 0 25px #00f0ff, 0 0 50px #9b00ff;
 }
 
 /* --- Логотип --- */
@@ -39,13 +55,23 @@ body {
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 20px;
-    text-shadow: 0 0 15px #5fb2f7, 0 0 30px #9cd6ff;
     animation: glow 3s ease-in-out infinite alternate;
+    transition: text-shadow 1s;
+}
+
+body.light .logo {
+    color: #1a73e8;
+    text-shadow: 0 0 5px #1a73e8, 0 0 10px #88cfff;
+}
+
+body.dark .logo {
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff, 0 0 20px #9b00ff;
 }
 
 @keyframes glow {
-    0% {text-shadow: 0 0 10px #5fb2f7, 0 0 20px #9cd6ff;}
-    100% {text-shadow: 0 0 20px #5fb2f7, 0 0 40px #9cd6ff;}
+    0% {text-shadow: 0 0 5px, 0 0 10px;}
+    100% {text-shadow: 0 0 10px, 0 0 20px;}
 }
 
 /* --- Поля ввода --- */
@@ -54,16 +80,30 @@ input {
     padding: 14px;
     margin-bottom: 15px;
     border-radius: 10px;
-    border: 2px solid #1a73e8;
+    border: 2px solid;
     font-size: 16px;
     outline: none;
-    background: rgba(240,248,255,0.7);
     transition: 0.3s;
 }
 
-input:focus {
-    box-shadow: 0 0 10px #88cfff;
+body.light input {
+    border-color: #1a73e8;
+    background: rgba(240,248,255,0.7);
+    color: #333;
 }
+
+body.dark input {
+    border-color: #00f0ff;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+}
+
+input:focus {
+    box-shadow: 0 0 10px;
+}
+
+body.light input:focus { box-shadow: 0 0 10px #88cfff; }
+body.dark input:focus { box-shadow: 0 0 10px #00f0ff; }
 
 /* --- Кнопки --- */
 button {
@@ -75,25 +115,79 @@ button {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    background: linear-gradient(90deg, #1a73e8, #88cfff);
-    color: #fff;
+    text-shadow: 0 0 3px #fff;
     transition: 0.3s;
 }
 
-button:hover {
-    opacity: 0.9;
+body.light button {
+    background: linear-gradient(90deg, #1a73e8, #88cfff);
+    color: white;
 }
 
-/* --- Кнопка регистрации --- */
+body.dark button {
+    background: linear-gradient(90deg, #00f0ff, #9b00ff);
+    color: white;
+}
+
+button:hover { opacity: 0.9; }
+
+/* --- Ссылка регистрации --- */
 .register-link {
     margin-top: 10px;
     text-decoration: none;
-    color: #1a73e8;
     font-weight: 700;
+}
+
+body.light .register-link { color: #1a73e8; }
+body.dark .register-link { color: #00f0ff; }
+
+/* --- Плавающая кнопка смены темы --- */
+.theme-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 22px;
+    transition: background 1s, color 1s, transform 0.3s;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    background: #ffd700;
+    color: #000;
+}
+
+body.dark .theme-switch {
+    background: #0f4c8c;
+    color: #ffd700;
+}
+
+.theme-switch:hover { transform: scale(1.1); }
+
+/* --- Анимация появления --- */
+input, button {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+input:nth-child(1) { animation-delay: 0.1s; }
+input:nth-child(2) { animation-delay: 0.2s; }
+button:nth-child(3) { animation-delay: 0.3s; }
+.register-link { animation: fadeInUp 0.4s forwards; animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
 }
 </style>
 </head>
-<body>
+<body class="light">
 
 <div class="login-box">
     <div class="logo">Москва-Live</div>
@@ -105,35 +199,47 @@ button:hover {
     <a href="reg.html" class="register-link">Регистрация</a>
 </div>
 
+<button class="theme-switch" id="themeBtn">🌞</button>
+
 <script>
 // Получаем пользователей из localStorage
 let users = JSON.parse(localStorage.getItem('users') || '[]');
 
+// Авторизация и переход в профиль
 function loginUser() {
     let login = document.getElementById('login').value.trim();
     let pass = document.getElementById('password').value.trim();
 
-    // Проверка на пустые поля
     if(!login || !pass){
         alert("❌ Пожалуйста, заполните все поля!");
         return;
     }
 
-    // Поиск пользователя
     let user = users.find(u => u.login === login && u.pass === pass);
     if(!user){
         alert("❌ Неверный логин или пароль!");
         return;
     }
 
-    // Сохраняем текущего пользователя для профиля
     localStorage.setItem('currentUser', JSON.stringify(user));
-
     alert(`✅ Привет, ${user.firstname}! Вы успешно вошли.`);
-    // Переход на страницу профиля
     window.location.href = "prof.html";
 }
-</script>
 
+// Смена темы
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+    const body = document.body;
+    if(body.classList.contains('light')){
+        body.classList.remove('light');
+        body.classList.add('dark');
+        themeBtn.textContent = '🌙';
+    } else {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        themeBtn.textContent = '🌞';
+    }
+});
+</script>
 </body>
 </html>
